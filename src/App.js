@@ -7,11 +7,11 @@ const items = [
     content: 'React is a front end javascript framework',
   },
   {
-    title: 'Wtat is React?',
+    title: 'Why React?',
     content: 'React is a front end javascript framework',
   },
   {
-    title: 'Wtat is React?',
+    title: 'How is React?',
     content: 'React is a front end javascript framework',
   },
 ];
