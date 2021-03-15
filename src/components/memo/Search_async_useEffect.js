@@ -5,10 +5,19 @@ const Search = () => {
   const [term, setTerm] = useState('');
 
   useEffect(() => {
+    // 1. helper function
     const search = async () => {
       await axios.get('');
     };
     search();
+
+    // 2. immidiate invoke function
+    (async () => {
+      await axios.get('');
+    })();
+
+    // 3. use promise
+    axios.get('').then(() => {});
   }, [term]);
 
   return (

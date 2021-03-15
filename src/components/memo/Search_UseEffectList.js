@@ -1,14 +1,16 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 
 const Search = () => {
   const [term, setTerm] = useState('');
 
   useEffect(() => {
-    const search = async () => {
-      await axios.get('');
-    };
-    search();
+    console.log('1. first render only');
+  }, []);
+  useEffect(() => {
+    console.log('2. all render');
+  });
+  useEffect(() => {
+    console.log('3. first render and when data changed');
   }, [term]);
 
   return (
