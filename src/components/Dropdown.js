@@ -6,17 +6,19 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
 
   // execute once when component is first rendered
   useEffect(() => {
-    document.body.addEventListener(
-      'click',
-      (event) => {
-        console.log('1.event listener');
-        if (ref.current && ref.current.contains(event.target)) {
-          return;
-        }
-        setOpen(false);
-      },
-      { capture: true }
-    );
+    const onBodyClick = (event) => {
+      console.log('1.event listener');
+      if (ref.current && ref.current.contains(event.target)) {
+        return;
+      }
+      setOpen(false);
+    };
+
+    document.body.addEventListener('click', onBodyClick, { capture: true });
+
+    return () => {
+      document.body.removeEventListener('click', onBodyClick);
+    };
   }, []);
 
   const renderedOptions = options.map((option) => {
