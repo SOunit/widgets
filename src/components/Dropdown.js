@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const Dropdown = ({ options, selected, onSelectedChange }) => {
   const [open, setOpen] = useState(false);
+  const ref = useRef();
 
   // execute once when component is first rendered
   useEffect(() => {
     document.body.addEventListener(
       'click',
-      () => {
+      (event) => {
+        console.log('1.event listener');
+        if (ref.current && ref.current.contains(event.target)) {
+          return;
+        }
         setOpen(false);
       },
       { capture: true }
@@ -23,7 +28,10 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
       <div
         key={option.value}
         className='item'
-        onClick={() => onSelectedChange(option)}
+        onClick={() => {
+          console.log('2.item event');
+          onSelectedChange(option);
+        }}
       >
         {option.label}
       </div>
@@ -31,11 +39,14 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
   });
 
   return (
-    <div className='ui form'>
+    <div className='ui form' ref={ref}>
       <div className='field'>
         <label className='label'>Select a Color</label>
         <div
-          onClick={() => setOpen(!open)}
+          onClick={() => {
+            console.log('3.selection event');
+            setOpen(!open);
+          }}
           className={`ui selection dropdown ${
             open ? 'visible transition' : ''
           }`}
